@@ -51,10 +51,9 @@ public class MilestoneController {
 
     @DeleteMapping("/milestones/{id}")
     public ResponseEntity<Void> deleteMilestone(@PathVariable int id) {
-        boolean deleted = service.deleteMilestone(id);
-
-        return deleted
-                ? ResponseEntity.noContent().build()  // 204 No Content
-                : ResponseEntity.notFound().build();  // 404 Not Found
+        service.deleteMilestone(id);
+        return ResponseEntity.noContent().build(); // Returns 204 No Content on success
     }
+
+
 }
