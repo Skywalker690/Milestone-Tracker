@@ -1,4 +1,6 @@
 package com.skywalker.backend.model;
 
-public class MileStone {
+public class Milestone {
+
+
 }
