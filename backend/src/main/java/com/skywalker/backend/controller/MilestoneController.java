@@ -3,8 +3,7 @@ package com.skywalker.backend.controller;
 import com.skywalker.backend.model.Milestone;
 import com.skywalker.backend.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,26 +15,26 @@ public class MilestoneController {
 
     @GetMapping("/milestones")
     public List<Milestone> getAllMilestones(){
-        return service.
+        return service.getAllMilestones();
     }
 
     @GetMapping("milestones/{id}")
-    public Milestone getMilestoneById(){
-        return
+    public Milestone getMilestoneById(@PathVariable int id){
+        return service.getMilestoneById(id);
     }
 
-    @GetMapping("/milestones")
-    public Milestone createMilestone(){
-        return
+    @PostMapping("/milestones")
+    public Milestone createMilestone(@RequestBody Milestone milestone){
+        return service.createMilestone(milestone);
     }
 
-    @GetMapping("milestones/{id}")
-    public Milestone updateMilestone(){
-        return
+    @PutMapping("milestones/{id}")
+    public Milestone updateMilestone(@PathVariable int id,@RequestBody Milestone milestone){
+        return service.updateMilestone(id,milestone);
     }
 
-    @GetMapping("/milestones")
-    public Milestone deleteMilestone(){
-        return
+    @DeleteMapping("/milestones/{id}")
+    public String deleteMilestone(@PathVariable int id){
+        return service.deleteMilestone(id);
     }
 }
