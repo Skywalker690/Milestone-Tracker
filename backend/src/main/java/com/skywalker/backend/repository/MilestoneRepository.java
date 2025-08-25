@@ -1,4 +1,7 @@
 package com.skywalker.backend.repository;
 
-public interface MilestoneRepository extends JpaRepository{
+import com.skywalker.backend.model.Milestone;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MilestoneRepository extends JpaRepository<Milestone,Integer> {
 }
