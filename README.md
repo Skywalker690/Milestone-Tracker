@@ -1,9 +1,8 @@
-[![wakatime](https://wakatime.com/badge/user/0d5ab76c-6ee3-49e6-8838-6d977be50546/project/bcb29915-10fd-4801-b77f-c5d1224c3335.svg)](https://wakatime.com/badge/user/0d5ab76c-6ee3-49e6-8838-6d977be50546/project/bcb29915-10fd-4801-b77f-c5d1224c3335)
-# Milestone Tracker 🚧 Under Construction
+# Milestone Tracker
 
 ## Description
 
-This full-stack application is currently under development. It will track personal or project milestones with a modern React frontend and a Spring Boot backend.
+A full-stack milestone tracker application built with **React** (frontend) and **Spring Boot** (backend). It allows users to **add, edit, delete, and mark milestones as completed**, with proper API integration and a responsive, user-friendly interface.
 
 ## Features ✨
 
@@ -12,6 +11,9 @@ This full-stack application is currently under development. It will track person
 * Edit existing milestones ✏️
 * Delete milestones 🗑️
 * Mark milestones as completed ✅
+* Dark theme & responsive design 🌙📱
+* Search, filter, and sort milestones 🔍
+* Statistics dashboard 📊
 
 ## Tech Stack 💻
 
@@ -21,17 +23,42 @@ This full-stack application is currently under development. It will track person
 
 ## Milestone Object Structure 📌
 
-* `id` (Long): Unique identifier 🔑
+* `id` (Integer): Unique identifier 🔑
 * `title` (String): Milestone title 🏷️
 * `description` (String): Details of the milestone 📝
 * `achieveDate` (Date): Target or actual date 📅
 * `completed` (Boolean): Completion status ✅
-* `createdDate` (Timestamp): Creation timestamp ⏰
-* `updatedDate` (Timestamp): Last update timestamp 🔄
+* `createdDate` (Date): Creation date ⏰
+* `completedDate` (Date): Completion date 📅
 
-## Status 🚀
+## Backend API Documentation 📄
 
-Currently under construction. Stay tuned for updates!
+The detailed API contracts for all endpoints are provided in a separate file: [`CONTRACT.md`](CONTRACT.md)
+
+## Frontend Integration 💻
+
+* Replace mock data with API calls as per `CONTRACT.md` endpoints
+* Handle toggle completion via PUT/PATCH
+* Proper error handling and loading states included
+
+## CORS Configuration 🌐
+
+Ensure frontend can access backend:
+
+```java
+@CrossOrigin(origins = "http://localhost:3000")
+```
+
+## Status ✅
+
+Frontend and backend are now fully integrated and functional.
+
+## 🧑‍💻 Author
+
+**Skywalker690**
+
+GitHub: [@Skywalker690](https://github.com/Skywalker690)
+
 
 ## License 📄
 
