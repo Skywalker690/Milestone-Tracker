@@ -4,7 +4,6 @@ import com.skywalker.backend.model.Milestone;
 import com.skywalker.backend.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,7 +21,7 @@ public class MilestoneService {
         return repository.findAll();
     }
 
-    public Optional<Milestone> getMilestoneById(int id) {
+    public Optional<Milestone> getMilestoneById(long id) {
         return repository.findById(id);
     }
 
@@ -32,7 +31,7 @@ public class MilestoneService {
     }
 
 
-    public void deleteMilestone(int id) {
+    public void deleteMilestone(long id) {
         if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Milestone not found");
         }
@@ -40,7 +39,7 @@ public class MilestoneService {
     }
 
 
-    public Optional<Milestone> updateMilestone(int id, Milestone milestone) {
+    public Optional<Milestone> updateMilestone(long id, Milestone milestone) {
         return repository.findById(id)
                 .map(existingMilestone -> {
                     existingMilestone.setTitle(milestone.getTitle());
