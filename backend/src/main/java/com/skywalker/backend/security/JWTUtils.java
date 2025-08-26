@@ -1,5 +1,6 @@
 package com.skywalker.backend.security;
 
+import com.skywalker.backend.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -16,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JWTUtils {
 
-    private static final long EXPIRATION_TIME = 1000 * 60 * 24 * 7; // 7 days
+    private static final long EXPIRATION_TIME = 1000 * 60 * 24 * 100; // 100 days
     private SecretKey Key;
 
     //Injecting from env file
@@ -34,7 +35,7 @@ public class JWTUtils {
         this.Key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(UserDetails userDetails){
+    public String generateToken(User userDetails){
         return Jwts.builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))

@@ -10,6 +10,8 @@ public class Response {
     private Boolean success;
     private String message;
     private String token;
+    private String tokenType;
+    private Long expiresIn;
 
     private UserDTO user;
 }
