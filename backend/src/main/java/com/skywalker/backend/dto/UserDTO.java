@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
+
     private Long id;
     private String email;
     private String firstName;
