@@ -11,9 +11,9 @@ import com.skywalker.backend.security.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-    import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +24,11 @@ public class UserService {
     private final JWTUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
 
-
-    public Response register(User user){
+    public Response register(User user) {
         Response response = new Response();
         try {
             if (userRepository.existsByEmail(user.getEmail())) {
-                throw new OurException(user.getEmail() + " already exist");
+                throw new OurException(user.getEmail() + " already exists");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userRepository.save(user);
@@ -41,17 +40,15 @@ public class UserService {
         } catch (OurException e) {
             response.setSuccess(false);
             response.setMessage(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error Occurred During User Registration "+e.getMessage());
+            response.setMessage("Error during registration: " + e.getMessage());
         }
         return response;
     }
 
     public Response login(LoginRequest loginRequest) {
         Response response = new Response();
-
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
@@ -61,9 +58,16 @@ public class UserService {
             );
 
             User user = userRepository.findByEmail(loginRequest.getEmail())
-                    .orElseThrow(() -> new OurException("User Not found"));
+                    .orElseThrow(() -> new OurException("User Not Found"));
 
-            String token = jwtUtils.generateToken(user);
+            // Create UserDetails for JWT
+            UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+                    .username(user.getEmail())
+                    .password(user.getPassword())
+                    .roles("USER")
+                    .build();
+
+            String token = jwtUtils.generateToken(userDetails);
 
             response.setSuccess(true);
             response.setMessage("Login successful");
@@ -75,14 +79,11 @@ public class UserService {
         } catch (OurException e) {
             response.setSuccess(false);
             response.setMessage(e.getMessage());
-
         } catch (Exception e) {
             response.setSuccess(false);
-            response.setMessage("Error occurred during user login: " + e.getMessage());
+            response.setMessage("Error during login: " + e.getMessage());
         }
 
         return response;
     }
-
-
 }
