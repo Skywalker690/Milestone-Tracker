@@ -1,13 +1,15 @@
 # Use an official JDK runtime as a parent image
 FROM eclipse-temurin:21-jdk AS build
 
-# Set working directory
 WORKDIR /app
 
 # Copy Maven wrapper & project files
 COPY pom.xml .
 COPY mvnw .
 COPY .mvn .mvn
+
+# Give execution permission to mvnw
+RUN chmod +x mvnw
 
 # Download dependencies (helps with caching)
 RUN ./mvnw dependency:go-offline
@@ -26,8 +28,6 @@ WORKDIR /app
 # Copy the packaged JAR from build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose port 8080
 EXPOSE 8080
 
-# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
