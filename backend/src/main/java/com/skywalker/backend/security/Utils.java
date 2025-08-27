@@ -18,18 +18,4 @@ public class Utils {
         return userDTO;
     }
 
-    public static MilestoneDTO mapMilestoneToMilestoneDTO(Milestone milestone) {
-        MilestoneDTO milestoneDTO = new MilestoneDTO();
-
-        milestoneDTO.setId(milestone.getId());
-        milestoneDTO.setTitle(milestone.getTitle());
-        milestoneDTO.setDescription(milestone.getDescription());
-        milestoneDTO.setCompleted(milestone.isCompleted());
-        milestoneDTO.setAchieveDate(milestone.getAchieveDate());
-        milestoneDTO.setCreatedDate(milestone.getCreatedDate());
-        milestoneDTO.setCompletedDate(milestone.getCompletedDate());
-        milestoneDTO.setUserId(milestone.getUser().getId());
-
-        return milestoneDTO;
-    }
 }
