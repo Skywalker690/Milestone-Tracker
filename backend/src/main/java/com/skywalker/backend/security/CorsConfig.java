@@ -1,4 +1,4 @@
-package com.skywalker.backend.config;
+package com.skywalker.backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,15 +1,18 @@
 package com.skywalker.backend.service;
 
+import com.skywalker.backend.dto.MilestoneDTO;
 import com.skywalker.backend.model.Milestone;
 import com.skywalker.backend.repository.MilestoneRepository;
+import com.skywalker.backend.security.JWTUtils;
+import com.skywalker.backend.security.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,39 +20,51 @@ public class MilestoneService {
 
     private final MilestoneRepository repository;
 
-
-    public List<Milestone> getAllMilestones() {
-        return repository.findAll();
+    public List<MilestoneDTO> getAllMilestones() {
+        return repository.findAll().stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public Optional<Milestone> getMilestoneById(int id) {
-        return repository.findById(id);
+    public Optional<MilestoneDTO> getMilestoneById(long id) {
+        return repository.findById(id).map(this::toDTO);
     }
 
-
-    public Milestone createMilestone(Milestone milestone) {
-        return repository.save(milestone);
+    public MilestoneDTO createMilestone(Milestone milestone) {
+        Milestone saved = repository.save(milestone);
+        return toDTO(saved);
     }
 
-
-    public void deleteMilestone(int id) {
+    public void deleteMilestone(long id) {
         if (!repository.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Milestone not found");
         }
         repository.deleteById(id);
     }
 
-
-    public Optional<Milestone> updateMilestone(int id, Milestone milestone) {
+    public Optional<MilestoneDTO> updateMilestone(long id, Milestone milestone) {
         return repository.findById(id)
-                .map(existingMilestone -> {
-                    existingMilestone.setTitle(milestone.getTitle());
-                    existingMilestone.setDescription(milestone.getDescription());
-                    existingMilestone.setAchieveDate(milestone.getAchieveDate());
-                    existingMilestone.setCompleted(milestone.isCompleted());
-                    existingMilestone.setCompletedDate(milestone.getCompletedDate());
-                    return repository.save(existingMilestone);
+                .map(existing -> {
+                    existing.setTitle(milestone.getTitle());
+                    existing.setDescription(milestone.getDescription());
+                    existing.setAchieveDate(milestone.getAchieveDate());
+                    existing.setCompleted(milestone.isCompleted());
+                    existing.setCompletedDate(milestone.getCompletedDate());
+                    return toDTO(repository.save(existing));
                 });
+    }
+
+    private MilestoneDTO toDTO(Milestone milestone) {
+        MilestoneDTO dto = new MilestoneDTO();
+        dto.setId(milestone.getId());
+        dto.setTitle(milestone.getTitle());
+        dto.setDescription(milestone.getDescription());
+        dto.setCompleted(milestone.isCompleted());
+        dto.setAchieveDate(milestone.getAchieveDate());
+        dto.setCreatedDate(milestone.getCreatedDate());   // no .toLocalDate()
+        dto.setCompletedDate(milestone.getCompletedDate()); // no .toLocalDate()
+        dto.setUserId(milestone.getUser() != null ? milestone.getUser().getId() : null);
+        return dto;
     }
 
 
