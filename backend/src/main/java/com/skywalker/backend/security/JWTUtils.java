@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Slf4j
 public class JWTUtils {
 
-    private static final long EXPIRATION_TIME = 1000L * 60 * 60 * 24 * 100; // 100 days
+    private static final long EXPIRATION_TIME = 1000L * 60 * 60 * 24 ; // 24 hr
     private SecretKey key;
 
     @Value("${jwt.secret}")

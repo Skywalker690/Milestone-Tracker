@@ -3,8 +3,6 @@ package com.skywalker.backend.service;
 import com.skywalker.backend.dto.MilestoneDTO;
 import com.skywalker.backend.model.Milestone;
 import com.skywalker.backend.repository.MilestoneRepository;
-import com.skywalker.backend.security.JWTUtils;
-import com.skywalker.backend.security.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -61,8 +59,8 @@ public class MilestoneService {
         dto.setDescription(milestone.getDescription());
         dto.setCompleted(milestone.isCompleted());
         dto.setAchieveDate(milestone.getAchieveDate());
-        dto.setCreatedDate(milestone.getCreatedDate());   // no .toLocalDate()
-        dto.setCompletedDate(milestone.getCompletedDate()); // no .toLocalDate()
+        dto.setCreatedDate(milestone.getCreatedDate());
+        dto.setCompletedDate(milestone.getCompletedDate());
         dto.setUserId(milestone.getUser() != null ? milestone.getUser().getId() : null);
         return dto;
     }
