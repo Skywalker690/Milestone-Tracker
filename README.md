@@ -1,65 +1,70 @@
 # Milestone Tracker
 
-## Description
+A **full-stack web application** for tracking milestones, featuring a **Spring Boot** backend , **PostgreSQL** database (NeonDB), and **React** frontend styled with **Tailwind CSS** and **Radix UI**. The project allows users to register, log in, create milestones, mark them as completed, and track progress over time.
 
-A full-stack milestone tracker application built with **React** (frontend) and **Spring Boot** (backend). It allows users to **add, edit, delete, and mark milestones as completed**, with proper API integration and a responsive, user-friendly interface.
+---
 
-## Features ✨
+## Features
 
-* Add new milestones 📝
-* View all milestones 📋
-* Edit existing milestones ✏️
-* Delete milestones 🗑️
-* Mark milestones as completed ✅
-* Dark theme & responsive design 🌙📱
-* Search, filter, and sort milestones 🔍
-* Statistics dashboard 📊
+* **User Authentication**: JWT-based login and registration.
+* **Milestone Management**: Add, update, delete, and mark milestones as completed.
+* **Progress Tracking**: View milestones by status.
+* **Secure API**: Spring Security with JWT.
+* **Persistent Data**: PostgreSQL database hosted on **NeonDB**.
+* **Deployment**:
 
-## Tech Stack 💻
+  * Hosted on **Render** (may take **\~30 seconds** to start due to free tier cold start).
 
-* **Backend:** Spring Boot, Java, PostgreSQL
-* **Frontend:** React ⚛️
-* **Database:** PostgreSQL 🗄️
+---
 
-## Milestone Object Structure 📌
+## Tech Stack
 
-* `id` (Integer): Unique identifier 🔑
-* `title` (String): Milestone title 🏷️
-* `description` (String): Details of the milestone 📝
-* `achieveDate` (Date): Target or actual date 📅
-* `completed` (Boolean): Completion status ✅
-* `createdDate` (Date): Creation date ⏰
-* `completedDate` (Date): Completion date 📅
+* **Frontend**: React (client/), Tailwind CSS, Radix UI
+* **Backend**: Spring Boot (server/), Spring Security, JWT
+* **Database**: PostgreSQL (NeonDB)
+* **Deployment**: Render (full-stack)
 
-## Backend API Documentation 📄
+---
 
-The detailed API contracts for all endpoints are provided in a separate file: [`CONTRACT.md`](CONTRACT.md)
+## Getting Started
 
-## Frontend Integration 💻
+### **1. Clone & Run**
 
-* Replace mock data with API calls as per `CONTRACT.md` endpoints
-* Handle toggle completion via PUT/PATCH
-* Proper error handling and loading states included
+```bash
+git clone https://github.com/Skywalker690/Milestone-Tracker.git
+cd Milestone-Tracker
 
-## CORS Configuration 🌐
+# Backend
+cd server
+./mvnw spring-boot:run
 
-Ensure frontend can access backend:
-
-```java
-@CrossOrigin(origins = "http://localhost:3000")
+# Frontend
+cd ../client
+npm install
+npm start
 ```
 
-## Status ✅
+### **2. Environment Variables**
 
-Frontend and backend are now fully integrated and functional.
+* `DB_URL`, `DB_USER`, `DB_PASSWORD`, `JWT_SECRET`
+* `REACT_APP_API_URL`
 
-## 🧑‍💻 Author
+---
 
-**Skywalker690**
+## Live Demo
 
-GitHub: [@Skywalker690](https://github.com/Skywalker690)
+* **Live App**: [milestone-tracker.vercel.app](https://milestone-tracker-e1nkp9kuy-skywalker690s-projects.vercel.app)
 
+*(Backend may take \~30s to wake up)*
 
-## License 📄
+---
 
-MIT License
+## Future Enhancements
+
+* Add milestone categories and tags
+* Add charts/analytics for milestone completion trends
+* Enable email notifications for due milestones
+
+---
+
+© 2025 All rights reserved. Skywalker690 ❤️
