@@ -1,8 +1,7 @@
 package com.skywalker.backend.security;
 
-import com.skywalker.backend.dto.MilestoneDTO;
+
 import com.skywalker.backend.dto.UserDTO;
-import com.skywalker.backend.model.Milestone;
 import com.skywalker.backend.model.User;
 
 public class Utils {

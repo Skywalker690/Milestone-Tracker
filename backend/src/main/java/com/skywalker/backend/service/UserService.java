@@ -75,7 +75,7 @@ public class UserService {
             response.setMessage("Login successful");
             response.setToken(token);
             response.setTokenType("Bearer");
-            response.setExpiresIn(8640000L);
+            response.setExpiresIn(86400L);
             response.setUser(Utils.mapUserEntityToUserDTO(user));
 
         } catch (OurException e) {
