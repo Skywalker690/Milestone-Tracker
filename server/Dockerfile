@@ -5,15 +5,15 @@ FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 
 # Copy Maven wrapper & project files
-COPY server/pom.xml .
-COPY server/mvnw .
-COPY server/.mvn .mvn
+COPY pom.xml .
+COPY mvnw .
+COPY .mvn .mvn
 
 # Download dependencies (helps with caching)
 RUN ./mvnw dependency:go-offline
 
 # Copy source code
-COPY server/src ./src
+COPY src ./src
 
 # Package the application
 RUN ./mvnw clean package -DskipTests
