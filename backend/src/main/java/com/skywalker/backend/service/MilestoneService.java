@@ -25,11 +25,9 @@ public class MilestoneService {
         return repository.findById(id);
     }
 
-
     public Milestone createMilestone(Milestone milestone) {
         return repository.save(milestone);
     }
-
 
     public void deleteMilestone(long id) {
         if (!repository.existsById(id)) {
@@ -37,7 +35,6 @@ public class MilestoneService {
         }
         repository.deleteById(id);
     }
-
 
     public Optional<Milestone> updateMilestone(long id, Milestone milestone) {
         return repository.findById(id)
@@ -50,6 +47,9 @@ public class MilestoneService {
                     return repository.save(existingMilestone);
                 });
     }
+
+
+
 
 
 }

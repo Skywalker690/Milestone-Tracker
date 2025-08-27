@@ -12,7 +12,7 @@ public class MilestoneDTO {
     private Long id;
     private String title;
     private String description;
-    private boolean completed;
+    private boolean completed = false;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate achieveDate;
@@ -21,7 +21,7 @@ public class MilestoneDTO {
     private LocalDate createdDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate completedDate;
+    private LocalDate completedDate =null;
 
     private Long userId; // only expose the user ID, not full user
 }

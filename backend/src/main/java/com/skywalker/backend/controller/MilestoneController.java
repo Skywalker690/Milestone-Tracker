@@ -1,7 +1,9 @@
 package com.skywalker.backend.controller;
 
 import com.skywalker.backend.model.Milestone;
+import com.skywalker.backend.model.User;
 import com.skywalker.backend.service.MilestoneService;
+import com.skywalker.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class MilestoneController {
 
     private final MilestoneService service;
+    private final UserService userService;
 
     @GetMapping("/milestones")
     public ResponseEntity<List<Milestone>> getAllMilestones() {
@@ -33,12 +36,13 @@ public class MilestoneController {
 
     @PostMapping("/milestones")
     public ResponseEntity<Milestone> createMilestone(@RequestBody Milestone milestone) {
-        Milestone createdMilestone = service.createMilestone(milestone);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(createdMilestone);
-    }
 
+        User currentUser = userService.getCurrentUser();
+        milestone.setUser(currentUser);
+
+        Milestone createdMilestone = service.createMilestone(milestone);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdMilestone);
+    }
 
     @PutMapping("/milestones/{id}")
     public ResponseEntity<Milestone> updateMilestone(@PathVariable int id, @RequestBody Milestone milestone) {
@@ -48,7 +52,6 @@ public class MilestoneController {
                 .map(ResponseEntity::ok) // 200 OK with updated object
                 .orElseGet(() -> ResponseEntity.notFound().build()); // 404 if ID doesn't exist
     }
-
 
     @DeleteMapping("/milestones/{id}")
     public ResponseEntity<Void> deleteMilestone(@PathVariable int id) {

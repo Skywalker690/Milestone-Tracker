@@ -26,7 +26,7 @@ public class Milestone {
     private LocalDate createdDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate completedDate;
+    private LocalDate completedDate=null;
 
     @PrePersist
     protected void onCreate() {
