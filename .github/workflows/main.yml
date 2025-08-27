@@ -20,5 +20,5 @@ jobs:
           java-version: 21
 
       - name: Build Application
-        working-directory: ./backend
+        working-directory: ./server
         run: mvn -B package --file pom.xml -DskipTests
