@@ -9,6 +9,7 @@ import MilestoneCard from './MilestoneCard';
 import MilestoneForm from './MilestoneForm';
 import { apiService } from '../services/apiService';
 import { useToast } from '../hooks/use-toast';
+import { useAuth } from '../context/AuthContext';
 
 const MilestoneTracker = () => {
   const [milestones, setMilestones] = useState([]);
@@ -22,6 +23,7 @@ const MilestoneTracker = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState(null);
   const { toast } = useToast();
+  const { user } = useAuth();
 
   // Load milestones from API
   const loadMilestones = useCallback(async (showRefreshIndicator = false) => {
@@ -203,7 +205,7 @@ const MilestoneTracker = () => {
       <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-4 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
-          <p className="text-gray-300">Loading milestones from server...</p>
+          <p className="text-gray-300">Loading your milestones...</p>
         </div>
       </div>
     );
@@ -226,14 +228,14 @@ const MilestoneTracker = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 p-4">
+    <div className="p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-white mb-2">Milestone Tracker</h1>
-              <p className="text-gray-300">Track and manage your project milestones efficiently</p>
+              <h1 className="text-3xl font-bold text-white mb-2">Your Milestones</h1>
+              <p className="text-gray-300">Track and manage your personal milestones</p>
             </div>
             <Button
               onClick={handleRefresh}
