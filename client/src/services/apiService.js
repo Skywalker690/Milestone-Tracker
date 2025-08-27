@@ -1,12 +1,9 @@
 import axios from 'axios';
 
 // Backend URL - Spring Boot API
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-// Development note: Ensure your Spring Boot application is running on port 8080
-// and has CORS configured to allow requests from http://localhost:3000
-
-// Create axios instance with default config
+//  Axios instance with default config
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000, // 10 second timeout
@@ -15,7 +12,6 @@ const api = axios.create({
   },
 });
 
-// Auth token storage
 let authToken = null;
 
 // Request interceptor for adding auth token and logging
