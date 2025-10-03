@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDate;
 
 @Data
@@ -23,15 +25,13 @@ public class Milestone {
     private LocalDate achieveDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @CreationTimestamp
     private LocalDate createdDate;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate completedDate=null;
 
-    @PrePersist
-    protected void onCreate() {
-        createdDate = LocalDate.now();
-    }
+
 
     @PreUpdate
     protected void onUpdate() {

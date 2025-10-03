@@ -3,6 +3,8 @@ package com.skywalker.backend.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,15 +31,12 @@ public class User implements UserDetails{
     private String password;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @CreationTimestamp
     private LocalDate createdDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Milestone> milestones;
 
-    @PrePersist
-    protected void onCreate() {
-        createdDate = LocalDate.now();
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
