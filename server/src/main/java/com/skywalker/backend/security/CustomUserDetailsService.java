@@ -1,4 +1,4 @@
-package com.skywalker.backend.service;
+package com.skywalker.backend.security;
 
 import com.skywalker.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

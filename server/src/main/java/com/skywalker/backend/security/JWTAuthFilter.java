@@ -1,6 +1,5 @@
 package com.skywalker.backend.security;
 
-import com.skywalker.backend.service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

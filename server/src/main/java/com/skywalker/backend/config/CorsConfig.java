@@ -1,4 +1,4 @@
-package com.skywalker.backend.security;
+package com.skywalker.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,9 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://milestone-tracker-phi.vercel.app")
+                        .allowedOrigins("https://milestone-tracker-phi.vercel.app",
+                                        "http://localhost:3000"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
